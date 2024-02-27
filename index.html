@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoicing System</title>
+    <!-- Latest compiled and minified CSS for Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .adding {
+            background-color: #d4edda;
+        }
+ 
+        .removing {
+            background-color: #edd4d4;
+        }
+
+        .btn-success {
+            background-color: #2b9543;
+        }
+
+        .btn-info {
+            background-color: #00b1e0;
+        }
+
+        @media (max-width: 700px) {
+            * {
+                font-size: 12px;
+            }
+        }
+ 
+    </style>
+</head>
+
+<body>
+    <div class="container py-3">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Invoicing</h2>
+            </div>
+            <div class="card-body">
+                <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#invoicingInfoModal">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <form>
+
+                    <div class="mb-3">
+                        <label for="selectVehicle" class="form-label">Select Vehicle:</label>
+                        <select class="form-select" id="selectVehicle">
+                            <option value="" selected disabled hidden>Select</option>
+                            <option value="van">Van</option>
+                            <option value="truck">Truck</option>
+                            <option value="car">Car</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="printInvoices">
+                        <label class="form-check-label" for="printInvoices">Print Invoices</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="reverseOrder">
+                        <label class="form-check-label" for="reverseOrder">Load orders in Reverse Order</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="invoiceDate" class="form-label">Invoice Date:</label>
+                        <input type="date" class="form-control" id="invoiceDate">
+                    </div>
+                    <div class="invoices-section">
+                        <h3>Invoice Details</h3>
+                        <button type="button" class="btn btn-outline-primary float-end">Skip this order</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order No</th>
+                                    <th>Customer Name</th>
+                                    <th>Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning">
+                                    <td>12345</td>
+                                    <td>Takealot</td>
+                                    <td>48</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary d-block w-100 mb-3"
+                        onclick="toggleTextBox()">Click here to enter an order to invoice</button>
+                    <div class="mb-3" id="hiddenTextBox" style="display: none;">
+                        <label for="orderInput" class="form-label">Order to Invoice:</label>
+                        <input type="text" class="form-control" id="orderInput" placeholder="Enter order number">
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-success w-100" data-bs-toggle="modal"
+                                data-bs-target="#startScanningModal">Start Scanning</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary w-100">Reload Invoice</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal"
+                            data-bs-target="#popupModal">Trip Sheet</button>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                        <button type="button" class="btn btn-success w-100">Complete</button>
+                    </div>
+                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                        <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="container py-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Tab Navigation -->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active " id="trip-sheet-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tripSheet" type="button" role="tab" aria-controls="tripSheet"
+                                        aria-selected="true">Trip Sheet</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="invoices-tab" data-bs-toggle="tab"
+                                        data-bs-target="#invoices" type="button" role="tab" aria-controls="invoices"
+                                        aria-selected="false">Invoices</button>
+                                </li>
+                            </ul>
+
+                            <!-- Tab Content -->
+                            <div class="tab-content" id="myTabContent">
+                                <!-- Trip Sheet Tab Pane -->
+                                <div class="tab-pane fade show active" id="tripSheet" role="tabpanel"
+                                    aria-labelledby="trip-sheet-tab">
+                                    <div class="container py-3">
+                                        <h2 class="card-title">New Trip Sheet</h2>
+                                        <form>
+                                            <div class="d-block text-end mb-3">
+                                                <button class="btn btn-outline-primary " type="button">New</button>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="vehicleSelect" class="form-label">Vehicle:</label>
+                                                <select class="form-select" id="vehicleSelect">
+                                                    <option value="" selected disabled hidden>Select</option>
+                                                    <option value="van">Van</option>
+                                                    <option value="truck">Truck</option>
+                                                    <option value="car">Car</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="driverSelect" class="form-label">Driver:</label>
+                                                <select class="form-select" id="driverSelect">
+                                                    <option>JHB - Repairs Vehicle</option>
+                                                    <!-- Add other driver options here -->
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="kmStart" class="form-label">KM Start:</label>
+                                                <input type="text" class="form-control" id="kmStart" value="268806">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="dateSelect" class="form-label">Date:</label>
+                                                <input type="date" class="form-control" id="dateSelect">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="sealNumber" class="form-label">Seal No:</label>
+                                                <input type="text" class="form-control" id="sealNumber">
+                                            </div>
+                                            <div class="row">
+                                                <div class=" d-grid mb-2">
+                                                    <button class="btn btn-primary w-100" type="button">Save</button>
+                                                </div>
+                                                <div class=" d-grid mb-2">
+                                                    <button class="btn btn-success w-100"
+                                                        type="button">Continue</button>
+                                                </div>
+                                                <div class=" d-grid mb-2">
+                                                    <button class="btn btn-outline-dark w-100" type="button">Print
+                                                        TS</button>
+                                                </div>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Invoices Tab Pane -->
+                                <div class="tab-pane fade" id="invoices" role="tabpanel" aria-labelledby="invoices-tab">
+                                    <div class="container py-3">
+                                        <h2 class="card-title">Invoices added to this Trip Sheet</h2>
+                                        <div class="d-block text-end mb-3">
+                                            <button class="btn btn-outline-primary " type="button">Add Invoice</button>
+                                            <button class="btn btn-outline-danger " type="button">Print ALL
+                                                Invoices</button>
+                                        </div>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Invoice</th>
+                                                    <th>Delivery Place</th>
+                                                    <th>Tel No</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>INV001</td>
+                                                    <td>Main Warehouse</td>
+                                                    <td>555-0100</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>INV002</td>
+                                                    <td>Outlet Store</td>
+                                                    <td>555-0120</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>INV003</td>
+                                                    <td>North Depot</td>
+                                                    <td>555-0140</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary w-100">Open Existing TS</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Information Modal -->
+    <div class="modal fade" id="invoicingInfoModal" tabindex="-1" aria-labelledby="invoicingInfoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invoicingInfoModalLabel">Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    To start invoicing, select a Vehicle from the list.
+                    The next available order to invoice will load automatically.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Scanning Modal -->
+    <div class="modal fade" id="startScanningModal" tabindex="-1" aria-labelledby="startScanningModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="startScanningModalLabel">Start Scanning</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="card-title">1817580 - Rental Vehicle</h2>
+                    <p>Picked By Joffrey Chatuma - 48 Parcels</p>
+                    <div class="container py-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <button class="btn float-end " data-bs-toggle="modal" data-bs-target="#infoModal">
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                                <div class="mb-3">
+                                    <label for="barcodeInput" class="form-label">Barcode:</label>
+                                    <input type="text" class="form-control" id="barcodeInput"
+                                        placeholder="Scan barcode here">
+                                </div>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Qty</th>
+                                            <th>Scn</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tableBody">
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Parcel 1 - BA2130</td>
+                                            <td>5</td>
+                                            <td>0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="d-flex" role="group" aria-label="Parcel Status">
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio1"
+                                        autocomplete="off" checked>
+                                    <label class="btn btn-outline-success w-100" for="btnradio1"
+                                        onclick="changeRowColor('adding')">Adding</label>
+
+                                    <input type="radio" class="btn-check" name="btnradio" id="btnradio2"
+                                        autocomplete="off">
+                                    <label class="btn btn-outline-danger w-100" for="btnradio2"
+                                        onclick="changeRowColor('removing')">Removing</label>
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                                        <button type="button" class="btn btn-secondary w-100">Trip Sheet</button>
+                                    </div>
+                                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                                        <button type="button" class="btn btn-success w-100">Complete</button>
+                                    </div>
+                                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                                        <button type="button" class="btn btn-danger w-100"
+                                            data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Scanning Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>For SEALED parcels, scan the parcel label.</li>
+                            <li>If an item is not in a sealed parcel, scan the item serial or barcode.</li>
+                            <li>Click on the 'Trip Sheet' button to add/close trip sheets.</li>
+                            <li>To remove items scanned, click on 'Remove' below.</li>
+                            <li>Tap and hold on a parcel or item to view details.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function toggleTextBox() {
+            var textBox = document.getElementById("hiddenTextBox");
+            if (textBox.style.display === "none") {
+                textBox.style.display = "block";
+            } else {
+                textBox.style.display = "none";
+            }
+        }
+
+        function changeRowColor(status) {
+            var tableRows = document.querySelectorAll('#startScanningModal .table tbody tr');
+            tableRows.forEach(function (row) {
+                if (status === 'adding') {
+                    row.classList.remove('removing');
+                    row.classList.add('adding');
+                } else if (status === 'removing') {
+                    row.classList.remove('adding');
+                    row.classList.add('removing');
+                }
+            });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
