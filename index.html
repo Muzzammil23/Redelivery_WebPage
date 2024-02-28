@@ -38,8 +38,14 @@
         }
         @media (max-width: 768px) {
         .btn {
-            font-size: 12px; 
+            font-size: 0.8em; 
         }
+
+        .table-responsive{
+            font-size: 0.8em; 
+
+        }
+        
     }
     </style>
 </head>
@@ -207,24 +213,23 @@
             </div>
 
             <div class="card-footer">
-                <div class="row">
-                    <div class="col-6">
-                        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal"
-                            data-bs-target="#startScanningModal">Start Scanning</button>
+                <div class="row mb-0">
+                    <div class="col-6 p-1">
+                        <button type="button" class="btn btn-success w-100 mb-0" data-bs-toggle="modal" data-bs-target="#startScanningModal">Start Scanning</button>
                     </div>
-                    <div class="col-6">
-                        <button type="button" class="btn btn-secondary w-100">Reload Invoice</button>
+                    <div class="col-6 p-1">
+                        <button type="button" class="btn btn-secondary w-100 mb-0">Reload Invoice</button>
                     </div>
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-4 mb-2 mb-md-0">
+                    <div class="col-4 mb-1 p-1">
                         <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#popupModal">Trip Sheet</button>
                     </div>
-                    <div class="col-4 mb-2 mb-md-0">
+                    <div class="col-4 mb-1 p-1 ">
                         <button type="button" class="btn btn-success w-100">Complete</button>
                     </div>
-                    <div class="col-4 mb-2 mb-md-0">
+                    <div class="col-4 mb-1 p-1">
                         <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -431,7 +436,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        <div class="row mt-3 card-footer">
                             <div class="col-6">
                                 <button type="button" class="btn btn-secondary w-100">Open Existing TS</button>
                             </div>
