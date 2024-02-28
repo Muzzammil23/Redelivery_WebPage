@@ -24,6 +24,18 @@
         .btn-info {
             background-color: #00b1e0;
         }
+
+        .card-body {
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .card-footer {
+            position: sticky;
+            bottom: 0;
+            background-color: white;
+            z-index: 1;
+        }
     </style>
 </head>
 
@@ -64,55 +76,143 @@
                     <div class="invoices-section">
                         <button type="button" class="btn btn-outline-primary float-end">Skip this order</button>
                         <h3>Invoice Details</h3>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Order No</th>
-                                    <th>Customer Name</th>
-                                    <th>Items</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="table-warning">
-                                    <td>12345</td>
-                                    <td>Takealot</td>
-                                    <td>48</td>
-                                </tr>
-                                <tr class="table-warning">
-                                    <td>12345</td>
-                                    <td>Takealot</td>
-                                    <td>48</td>
-                                </tr>
-                                <tr class="table-warning">
-                                    <td>12345</td>
-                                    <td>Takealot</td>
-                                    <td>48</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div style="max-height: 300px; overflow-y: auto;">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order No</th>
+                                        <th>Customer Name</th>
+                                        <th>Items</th>
+                                        <!-- <th id="redeliveryColumn">Redelivery Confirmed</th>  -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-check" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                    <tr class="table-warning">
+                                        <td>12345</td>
+                                        <td>Takealot</td>
+                                        <td>48</td>
+                                        <!-- <td class="RedeliveryConfirmed"><i class="fa fa-times" aria-hidden="true"></i></td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
                     <button type="button" class="btn btn-outline-primary d-block w-100 mb-3"
-                        onclick="toggleTextBox()">Click here to enter an order to invoice</button>
+                        onclick="toggleTextBox()">Click
+                        here to enter an order to invoice</button>
                     <div class="mb-3 container" id="hiddenTextBox" style="display: none;">
                         <label for="orderInput" class="form-label">Order to Invoice:</label>
                         <input type="text" class="form-control" id="orderInput" placeholder="Enter order number">
                         <button type="button" class="btn btn-primary mt-2" id="submitOrderButton">Submit Order</button>
                         <button type="button" class="btn btn-danger mt-2" onclick="toggleTextBox()">Close</button>
                     </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="button" class="btn btn-success w-100" data-bs-toggle="modal"
-                                data-bs-target="#startScanningModal">Start Scanning</button>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-secondary w-100">Reload Invoice</button>
-                        </div>
-                    </div>
                 </form>
+
             </div>
+
             <div class="card-footer">
                 <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal"
+                            data-bs-target="#startScanningModal">Start Scanning</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary w-100">Reload Invoice</button>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
                     <div class="col-12 col-md-4 mb-2 mb-md-0">
                         <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal"
                             data-bs-target="#popupModal">Trip Sheet</button>
@@ -124,10 +224,14 @@
                         <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
+
+
             </div>
 
         </div>
     </div>
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="popupModal" tabindex="-1" aria-labelledby="popupModalLabel" aria-hidden="true">
@@ -139,7 +243,7 @@
                             <!-- Tab Navigation -->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active " id="trip-sheet-tab" data-bs-toggle="tab"
+                                    <button class="nav-link active " id="trip-sheetz-tab" data-bs-toggle="tab"
                                         data-bs-target="#tripSheet" type="button" role="tab" aria-controls="tripSheet"
                                         aria-selected="true">Trip Sheet</button>
                                 </li>
@@ -175,12 +279,13 @@
                                                 <label for="driverSelect" class="form-label">Driver:</label>
                                                 <select class="form-select" id="driverSelect">
                                                     <option value="" selected disabled hidden>Select</option>
-                                                    <option>JHB - Repairs Vehicle</option> 
+                                                    <option>JHB - Repairs Vehicle</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="kmStart" class="form-label">KM Start:</label>
-                                                <input type="text" class="form-control" id="kmStart" placeholder="Enter Mileage">
+                                                <input type="number" class="form-control" id="kmStart"
+                                                    placeholder="Enter Mileage">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="dateSelect" class="form-label">Date:</label>
@@ -188,7 +293,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="sealNumber" class="form-label">Seal No:</label>
-                                                <input type="text" class="form-control" id="sealNumber" placeholder="Enter Mileage">
+                                                <input type="number" class="form-control" id="sealNumber"
+                                                    placeholder="Enter Seal Number">
                                             </div>
                                             <div class="row">
                                                 <div class=" d-grid mb-2">
@@ -325,16 +431,16 @@
                                 <button type="button" class="btn btn-secondary w-100">Open Existing TS</button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger w-100"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
 
         </div>
-    </div>
     </div>
 
     <!-- Second Information Modal -->
@@ -563,6 +669,10 @@
         </div>
     </div>
 
+    <!-- <button type="button" id="toggleRedeliveryColumn" class="btn btn-outline-secondary float-end">Toggle Redelivery
+        Status</button> -->
+
+
 
     <script>
         function toggleTextBox() {
@@ -590,6 +700,21 @@
                 }
             });
         }
+
+        document.getElementById("toggleRedeliveryColumn").addEventListener("click", function () {
+            var redeliveryColumn = document.querySelectorAll(".RedeliveryConfirmed"); // Select all elements with the RedeliveryConfirmed class
+            var columnVisibility = redeliveryColumn[0].style.display === "none" ? "" : "none"; // Determine the new display state based on the current state
+
+            // Apply the new display state to each element in the RedeliveryConfirmed class
+            redeliveryColumn.forEach(function (column) {
+                column.style.display = columnVisibility;
+            });
+
+            // Optionally, toggle the header visibility
+            var header = document.getElementById("redeliveryColumn");
+            header.style.display = columnVisibility;
+        });
+
 
     </script>
 
