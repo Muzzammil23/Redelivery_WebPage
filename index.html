@@ -8,6 +8,13 @@
     <!-- Latest compiled and minified CSS for Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+    <!-- Bootstrap JS (for tooltips) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <style>
         .adding {
             background-color: #d4edda;
@@ -36,17 +43,23 @@
             background-color: white;
             z-index: 1;
         }
+
+        .form-check-label i {
+            margin-right: 1em;
+        }
+
+
         @media (max-width: 768px) {
-        .btn {
-            font-size: 0.8em; 
-        }
+            .btn {
+                font-size: 0.8em;
+            }
 
-        .table-responsive{
-            font-size: 0.8em; 
+            .table-responsive {
+                font-size: 0.8em;
+
+            }
 
         }
-        
-    }
     </style>
 </head>
 
@@ -54,39 +67,56 @@
     <div class="container py-3">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Invoicing</h2>
-            </div>
-            <div class="card-body">
                 <button class="btn float-end" data-bs-toggle="modal" data-bs-target="#invoicingInfoModal">
                     <i class="fas fa-info-circle"></i>
                 </button>
-                <form>
+                <h2 class="card-title">Invoicing</h2>
+            </div>
+            <div class="card-body">
 
+                <form>
                     <div class="mb-3">
                         <label for="selectVehicle" class="form-label">Select Vehicle:</label>
                         <select class="form-select" id="selectVehicle">
                             <option value="" selected disabled hidden>Select</option>
-                            <option value="van">Van</option>
-                            <option value="truck">Truck</option>
-                            <option value="car">Car</option>
+                            <option value="1817580 ">1817580 - Rental Vehicle</option>
+                            <option value="1817581 ">1817581 - Rental Vehicle</option>
+                            <option value="1817582 ">1817582 - Rental Vehicle</option>
+                            <option value="1817583 ">1817583 - Rental Vehicle</option>
+                            <option value="1817584 ">1817584 - Rental Vehicle</option>
+                            <option value="1817585 ">1817585 - Rental Vehicle</option>
                         </select>
                     </div>
 
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="printInvoices">
-                        <label class="form-check-label" for="printInvoices">Print Invoices</label>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="reverseOrder">
-                        <label class="form-check-label" for="reverseOrder">Load orders in Reverse Order</label>
-                    </div>
+
                     <div class="mb-3">
                         <label for="invoiceDate" class="form-label">Invoice Date:</label>
                         <input type="date" class="form-control" id="invoiceDate">
                     </div>
                     <div class="invoices-section">
-                        <button type="button" class="btn btn-outline-primary float-end">Skip this order</button>
+                        <button type="button" class="btn btn-outline-primary float-end">Skip order</button>
                         <h3>Invoice Details</h3>
+                        <div class="d-flex align-items-center">
+                            <!-- Checkbox 1 with Icon and Tooltip -->
+                            <div class="mb-3 form-check mr-9">
+                                <input type="checkbox" class="form-check-input" id="printInvoices">
+                                <label class="form-check-label" for="printInvoices">
+                                    <i class="fas fa-print" title="Print Invoices" data-toggle="tooltip"
+                                        data-placement="top"></i>
+                                </label>
+                            </div>
+
+                            <!-- Checkbox 2 with Icon and Tooltip -->
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="reverseOrder">
+                                <label class="form-check-label" for="reverseOrder">
+                                    <i class="fas fa-sort-amount-down-alt" title="Load orders in Reverse Order"
+                                        data-toggle="tooltip" data-placement="top"></i>
+                                </label>
+                            </div>
+                        </div>
+
+
                         <div style="max-height: 300px; overflow-y: auto;">
                             <table class="table">
                                 <thead>
@@ -196,16 +226,14 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-primary d-block w-100 mb-3"
-                        onclick="toggleTextBox()">Click
-                        here to enter an order to invoice</button>
+                        onclick="toggleTextBox()">Click to enter an order number</button>
                     <div class="mb-3 container" id="hiddenTextBox" style="display: none;">
-                        <label for="orderInput" class="form-label">Order to Invoice:</label>
+                        <label for="orderInput" class="form-label">Order Number :</label>
                         <input type="text" class="form-control" id="orderInput" placeholder="Enter order number">
-                        <button type="button" class="btn btn-primary mt-2" id="submitOrderButton">Submit Order</button>
+                        <button type="button" class="btn btn-primary mt-2" id="submitOrderButton">Load</button>
                         <button type="button" class="btn btn-danger mt-2" onclick="toggleTextBox()">Close</button>
                     </div>
                 </form>
@@ -215,7 +243,8 @@
             <div class="card-footer">
                 <div class="row mb-0">
                     <div class="col-6 p-1">
-                        <button type="button" class="btn btn-success w-100 mb-0" data-bs-toggle="modal" data-bs-target="#startScanningModal">Start Scanning</button>
+                        <button type="button" class="btn btn-success w-100 mb-0" data-bs-toggle="modal"
+                            data-bs-target="#startScanningModal">Start Scanning</button>
                     </div>
                     <div class="col-6 p-1">
                         <button type="button" class="btn btn-secondary w-100 mb-0">Reload Invoice</button>
@@ -224,7 +253,8 @@
 
                 <div class="row mt-3">
                     <div class="col-4 mb-1 p-1">
-                        <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#popupModal">Trip Sheet</button>
+                        <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal"
+                            data-bs-target="#popupModal">Trip Sheet</button>
                     </div>
                     <div class="col-4 mb-1 p-1 ">
                         <button type="button" class="btn btn-success w-100">Complete</button>
@@ -233,7 +263,7 @@
                         <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
-                
+
 
 
             </div>
@@ -638,15 +668,17 @@
                             <div class="card-footer">
                                 <div class="row mt-3">
                                     <div class="col-4 mb-1 p-1">
-                                        <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal" data-bs-target="#popupModal">Trip Sheet</button>
+                                        <button type="button" class="btn btn-secondary w-100" data-bs-toggle="modal"
+                                            data-bs-target="#popupModal">Trip Sheet</button>
                                     </div>
                                     <div class="col-4 mb-1 p-1 ">
                                         <button type="button" class="btn btn-success w-100">Complete</button>
                                     </div>
                                     <div class="col-4 mb-1 p-1">
-                                        <button type="button" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger w-100"
+                                            data-bs-dismiss="modal">Close</button>
                                     </div>
-                                </div>                             
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -684,16 +716,21 @@
 
 
     <script>
+
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
         function toggleTextBox() {
             var textBox = document.getElementById("hiddenTextBox");
             var submitButton = document.getElementById("submitOrderButton");
 
             if (textBox.style.display === "none") {
                 textBox.style.display = "block";
-                submitButton.style.display = "inline-block"; // Show the submit button when the text box is shown
+                submitButton.style.display = "inline-block";
+                textBox.scrollIntoView({ behavior: "smooth" });
             } else {
                 textBox.style.display = "none";
-                submitButton.style.display = "none"; // Hide the submit button when the text box is hidden
+                submitButton.style.display = "none";
             }
         }
 
@@ -711,15 +748,13 @@
         }
 
         document.getElementById("toggleRedeliveryColumn").addEventListener("click", function () {
-            var redeliveryColumn = document.querySelectorAll(".RedeliveryConfirmed"); // Select all elements with the RedeliveryConfirmed class
-            var columnVisibility = redeliveryColumn[0].style.display === "none" ? "" : "none"; // Determine the new display state based on the current state
+            var redeliveryColumn = document.querySelectorAll(".RedeliveryConfirmed");
+            var columnVisibility = redeliveryColumn[0].style.display === "none" ? "" : "none";
 
-            // Apply the new display state to each element in the RedeliveryConfirmed class
             redeliveryColumn.forEach(function (column) {
                 column.style.display = columnVisibility;
             });
 
-            // Optionally, toggle the header visibility
             var header = document.getElementById("redeliveryColumn");
             header.style.display = columnVisibility;
         });
